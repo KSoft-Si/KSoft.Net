@@ -11,6 +11,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 #endregion
+
 namespace KSoftDotNet.Manager
 {
     public class KSoft
