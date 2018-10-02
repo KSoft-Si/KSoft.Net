@@ -12,12 +12,18 @@ namespace KSoftDotNet.Manager
 {
     internal class WebManager : IWebManager
     {
+        private bool _first = true;
         HttpClient httpClient = new HttpClient();
-        public async Task<Result> GetData(Uri uri)
+        public async Task<Result> GetData(Uri uri, string token)
         {
             try
             {
                 Result result = new Result(false, "");
+                if (_first)
+                {
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"NANI {token}");
+                    _first = false;
+                }
                 var response = await httpClient.GetAsync(uri);
                 var responseContent = await response.Content.ReadAsStringAsync();
                 result.IsSuccess = response.IsSuccessStatusCode;
@@ -30,9 +36,26 @@ namespace KSoftDotNet.Manager
             }
 
         }
-        public void SetToken(string token)
+        public async Task<Result> PostData(Uri uri, HttpContent content, string token)
         {
-            httpClient.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse("NANI" + token);
+            try
+            {
+                Result result = new Result(false, "");
+                if (_first)
+                {
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"NANI {token}");
+                    _first = false;
+                }
+                var response = await httpClient.PostAsync(uri, content);
+                var responseContent = await response.Content.ReadAsStringAsync();
+                result.IsSuccess = response.IsSuccessStatusCode;
+                result.ResultJson = responseContent;
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new Result(false, e.Message);
+            }
         }
     }
 }

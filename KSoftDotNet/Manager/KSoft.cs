@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Specialized;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 #endregion
@@ -21,17 +22,18 @@ namespace KSoftDotNet.Manager
 
         private const string BaseUrl = "https://api.ksoft.si/";
         private const string BaseImage = "images";
+        private const string BaseBans = "bans";
 
         /// <summary>
         /// Initialize KSoft Manager.
         /// </summary>
         /// <param name="token">Key used for authentication.</param>
-        public KSoft(string token = "")
+        public KSoft(string token)
         {
             _token = token;
-            _webManager.SetToken(token);
         }
 
+        #region Image api
         /// <summary>
         /// Get random image.
         /// </summary>
@@ -45,7 +47,7 @@ namespace KSoftDotNet.Manager
                 nvc.Add("tag", tag);
             nvc.Add("nsfw", nsfw.ToString());
 
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-image{UriExtensions.ToQueryString(nvc)}"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-image{UriExtensions.ToQueryString(nvc)}"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get image: {result.ResultJson}");
@@ -59,7 +61,7 @@ namespace KSoftDotNet.Manager
         /// <returns>KSoftTags object</returns>
         public async Task<KSoftTags> GetTags()
         {
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/tags"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/tags"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get tags: {result.ResultJson}");
@@ -78,7 +80,7 @@ namespace KSoftDotNet.Manager
             {
                 throw new Exception($"Query cannot be null or empty: {tag}");
             }
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/tags/{tag}"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/tags/{tag}"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get tag: {result.ResultJson}");
@@ -97,7 +99,7 @@ namespace KSoftDotNet.Manager
             {
                 throw new Exception($"Snowflake query cannot be null or empty: {snowflake}");
             }
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/image/{snowflake}"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/image/{snowflake}"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get image: {result.ResultJson}");
@@ -111,7 +113,7 @@ namespace KSoftDotNet.Manager
         /// <returns>KSoftRedditPost object</returns>
         public async Task<KSoftRedditPost> GetRandomMeme()
         {
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-meme"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-meme"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get meme: {result.ResultJson}");
@@ -127,7 +129,7 @@ namespace KSoftDotNet.Manager
         public async Task<KSoftWikihowPost> GetRandomWikihow(bool nsfw = false)
         {
             var nvc = new NameValueCollection { { "nsfw", nsfw.ToString() } };
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-wikihow{UriExtensions.ToQueryString(nvc)}"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-wikihow{UriExtensions.ToQueryString(nvc)}"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get wikihow article: {result.ResultJson}");
@@ -141,7 +143,7 @@ namespace KSoftDotNet.Manager
         /// <returns>KSoftRedditPost object</returns>
         public async Task<KSoftRedditPost> GetRandomAww()
         {
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-aww"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-aww"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get post: {result.ResultJson}");
@@ -157,7 +159,7 @@ namespace KSoftDotNet.Manager
         public async Task<KSoftRedditPost> GetRandomNsfw(bool gifs = false)
         {
             var nvc = new NameValueCollection { { "gifs", gifs.ToString() } };
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-nsfw{UriExtensions.ToQueryString(nvc)}"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/random-nsfw{UriExtensions.ToQueryString(nvc)}"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get post: {result.ResultJson}");
@@ -174,12 +176,42 @@ namespace KSoftDotNet.Manager
         public async Task<KSoftRedditPost> GetRandomSubredditImage(string subreddit = "all", string span = "Day")
         {
             var nvc = new NameValueCollection { { "span", span } };
-            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/rand-reddit/{subreddit}{UriExtensions.ToQueryString(nvc)}"));
+            var result = await _webManager.GetData(new Uri($"{BaseUrl}{BaseImage}/rand-reddit/{subreddit}{UriExtensions.ToQueryString(nvc)}"), _token);
             if (!result.IsSuccess)
             {
                 throw new WebException($"Failed to get post: {result.ResultJson}");
             }
             return JsonConvert.DeserializeObject<KSoftRedditPost>(result.ResultJson);
         }
+
+        #endregion
+
+        #region Bans API
+
+        public async Task<KSoftBan> AddBan(int userID, string reason, string proof, int reporterID = -0, string userName = null, int userDiscrim = -0, bool appealPossible = false)
+        {
+            var nvc = new NameValueCollection
+            {
+                { "appeal_possible", appealPossible.ToString() },
+                { "user", userID.ToString() },
+                { "reason", reason },
+                { "proof", proof }
+            };
+            if (reporterID != -0)
+                nvc.Add("mod", reporterID.ToString());
+            if (!string.IsNullOrEmpty(userName))
+                nvc.Add("user_name", userName);
+            if (userDiscrim != -0)
+                nvc.Add("user_discriminator", userDiscrim.ToString());
+            var json = JsonConvert.SerializeObject(nvc);
+            HttpContent httpContent = new StringContent(json);
+            Console.WriteLine("json: " + json);
+            Console.WriteLine("httpContent: " + httpContent.ReadAsStringAsync());
+            Console.WriteLine("nvc: " + nvc.AllKeys.ToString());
+            var result = await _webManager.PostData(new Uri($"{BaseUrl}{BaseBans}/add"), httpContent, _token);
+            return JsonConvert.DeserializeObject<KSoftBan>(result.ResultJson);
+        }
+
+        #endregion
     }
 }

@@ -3,11 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Fooper dooper</Company>
+    <Company>KSoft.Si</Company>
     <Authors>fooooooooooooo</Authors>
     <Description>Wrapper for the KSoft API written in C#</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.0.1</Version>
+    <Version>1.0.9</Version>
+    <PackageId>KSoft.Net</PackageId>
+    <Product>KSoft.Net</Product>
   </PropertyGroup>
 
   <ItemGroup>

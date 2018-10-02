@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using KSoftDotNet.Model.Web;
+using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using KSoftDotNet.Model.Web;
 
 namespace KSoftDotNet.Interfaces
 {
     internal interface IWebManager
     {
-        Task<Result> GetData(Uri uri);
-
-        void SetToken(string token);
+        Task<Result> GetData(Uri uri, string token);
+        Task<Result> PostData(Uri uri, HttpContent content, string token);
     }
 }

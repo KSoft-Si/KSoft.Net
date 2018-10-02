@@ -17,16 +17,16 @@ namespace KSoftDotNet.Model.Results
         public string Subreddit { get; set; }
 
         [JsonProperty("upvotes")]
-        public int Upvotes { get; set; }
+        public float Upvotes { get; set; }
 
         [JsonProperty("downvotes")]
-        public int Downvotes { get; set; }
+        public float Downvotes { get; set; }
 
         [JsonProperty("comments")]
-        public int Comments { get; set; }
+        public float Comments { get; set; }
 
         [JsonProperty("created_at")]
-        public int CreatedAt { get; set; }
+        public float CreatedAt { get; set; }
 
         [JsonProperty("nsfw")]
         public bool Nsfw { get; set; }
