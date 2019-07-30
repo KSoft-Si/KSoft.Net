@@ -241,7 +241,96 @@ namespace KSoft.Net
 
         #region Kumo API
 
-        // Kumo API
+        /// <summary>
+        /// You can get coordinates and more information about the searched location, if needed image of the area is generated.
+        /// </summary>
+        /// <param name="query">Your location query</param>
+        /// <param name="fast">Default: fast, return location data faster, but with less information</param>
+        /// <param name="more">Default: false, return more than one location</param>
+        /// <param name="mapZoom">Default: 12, set your own zoom level, if fast is not set or false, then this setting will be ignored because map zoom is calculated</param>
+        /// <param name="includeMap">Default: false, if to include an image of the area</param>
+        /// <returns>KSoftLocation</returns>
+        public KSoftLocation SearchLocation(string query, bool fast = false, bool more = false, int mapZoom = 12, bool includeMap = false) {
+            var request = new RestRequest("kumo/gis");
+
+            request.AddQueryParameter("q", query);
+            request.AddQueryParameter("fast", fast.ToString());
+            request.AddQueryParameter("more", more.ToString());
+            request.AddQueryParameter("map_zoom", mapZoom.ToString());
+            request.AddQueryParameter("include_map", includeMap.ToString());
+
+            return Execute<KSoftLocation>(request);
+        }
+
+        /// <summary>
+        /// Gets weather by coordinates.
+        /// </summary>
+        /// <param name="reportType">Select weather report type. Can be one of: "currently", "minutely", "hourly", "daily"  </param>
+        /// <param name="query">Location query</param>
+        /// <param name="units">Default: auto, select units, you can choose from: "si", "us", "uk2", "ca", "auto"</param>
+        /// <param name="language">Default: en, select language, all available languages: 'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko', 'kw', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'</param>
+        /// <param name="icons">Default: original, select icon pack</param>
+        /// <returns>KSoftWeather</returns>
+        public KSoftWeather BasicWeather(string reportType, string query, string units = "auto", string language = "en", string icons = "original") {
+            var request = new RestRequest($"kumo/weather/{reportType}");
+
+            request.AddQueryParameter("q", query);
+            request.AddQueryParameter("units", units);
+            request.AddQueryParameter("lang", language);
+            request.AddQueryParameter("icons", icons);
+
+            return Execute<KSoftWeather>(request);
+        }
+
+        /// <summary>
+        /// Gets weather by coordinates, this endpoint is faster than weather - easy, because it doesn't need to lookup the location.
+        /// </summary>
+        /// <param name="latitude">Latitude coordinate</param>
+        /// <param name="longitude">Longitude coordinate</param>
+        /// <param name="reportType">Select weather type. Can be one of: "currently", "minutely", "hourly", "daily"</param>
+        /// <param name="units">Default: auto, select units, you can choose from: "si", "us", "uk2", "ca", "auto"</param>
+        /// <param name="language">Default: en, select language, all available languages: 'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko', 'kw', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'</param>
+        /// <param name="icons">Default: original, select icon pack</param>
+        /// <returns>KSoftWeather</returns>
+        public KSoftWeather AdvancedWeather(float latitude, float longitude, string reportType, string units = "auto", string language = "en", string icons = "original") {
+            var request = new RestRequest($"kumo/weather/{latitude},{longitude}/{reportType}");
+
+            request.AddQueryParameter("units", units);
+            request.AddQueryParameter("lang", language);
+            request.AddQueryParameter("icons", icons);
+
+            return Execute<KSoftWeather>(request);
+        }
+
+        /// <summary>
+        /// Gets location data from the IP address.
+        /// </summary>
+        /// <param name="ip">IP address</param>
+        /// <returns>KSoftGeoIP</returns>
+        public KSoftGeoIP GeoIP(string ip) {
+            var request = new RestRequest($"kumo/geoip");
+
+            request.AddQueryParameter("ip", ip);
+
+            return Execute<KSoftGeoIP>(request);
+        }
+
+        /// <summary>
+        /// Currency conversion.
+        /// </summary>
+        /// <param name="from">ISO Standard for 3 letter currency naming: https://en.wikipedia.org/wiki/ISO_4217#Active_codes</param>
+        /// <param name="to">ISO Standard for 3 letter currency naming: https://en.wikipedia.org/wiki/ISO_4217#Active_codes</param>
+        /// <param name="value">Float or Integer you want to convert</param>
+        /// <returns>KSoftCurrency</returns>
+        public KSoftCurrency CurrencyConversion(string from, string to, float value) {
+            var request = new RestRequest($"kumo/currency");
+
+            request.AddQueryParameter("from", from);
+            request.AddQueryParameter("to", to);
+            request.AddQueryParameter("value", value.ToString());
+
+            return Execute<KSoftCurrency>(request);
+        }
 
         #endregion
     }
