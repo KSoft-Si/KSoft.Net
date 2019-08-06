@@ -93,7 +93,7 @@ namespace KSoft.Net
         /// <param name="nsfw">Default: false, if to display nsfw content.</param>
         /// <returns>KSoftWikiHowPost</returns>
         public KSoftWikiHowPost RandomWikiHow(bool nsfw = false) {
-            var request = new RestRequest("images/random-meme");
+            var request = new RestRequest("images/random-wikihow");
 
             request.AddQueryParameter("nsfw", nsfw.ToString());
 
@@ -131,13 +131,14 @@ namespace KSoft.Net
         /// <param name="span">Default: "day", select range from which to get the images. Can be one of the following: "hour", "day", "week", "month", "year", "all"</param>
         /// <returns>KSoftRedditPost</returns>
         public KSoftRedditPost RandomReddit(string subreddit, bool removeNsfw, string span) {
-            var request = new RestRequest("images/rand-reddit");
+            var request = new RestRequest($"images/rand-reddit/{subreddit}");
 
             request.AddQueryParameter("remove-nsfw", removeNsfw.ToString());
             request.AddQueryParameter("span", span);
 
             return Execute<KSoftRedditPost>(request);
         }
+
         #endregion
 
 
@@ -263,7 +264,7 @@ namespace KSoft.Net
         }
 
         /// <summary>
-        /// Gets weather by coordinates.
+        /// Gets weather by location.
         /// </summary>
         /// <param name="reportType">Select weather report type. Can be one of: "currently", "minutely", "hourly", "daily"  </param>
         /// <param name="query">Location query</param>
@@ -332,6 +333,50 @@ namespace KSoft.Net
             return Execute<KSoftCurrency>(request);
         }
 
+        #endregion
+
+        #region Lyrics & Music API
+
+        public KSoftLyrics SearchLyrics(string query, bool textOnly, int limit) {
+            var request = new RestRequest($"lyrics/search");
+
+            request.AddQueryParameter("q", query);
+            request.AddQueryParameter("text_only", textOnly.ToString());
+            request.AddQueryParameter("limit", limit.ToString());
+
+            return Execute<KSoftLyrics>(request);
+        }
+
+        /* Error
+        public KSoftRecommendations MusicRecommendations(Array tracks, string provider) {
+            var request = new RestRequest($"music/recommendations", Method.POST);
+
+            request.AddJsonBody(tracks);
+            request.AddBody(provider);
+
+            return Execute<KSoftRecommendations>(request);
+        }
+        */
+
+        public KSoftArtistInfo ArtistByID(int id) {
+            var request = new RestRequest($"lyrics/artist/{id}");
+
+            return Execute<KSoftArtistInfo>(request);
+        }
+
+
+        public KSoftAlbumInfo AlbumByID(int id) {
+            var request = new RestRequest($"lyrics/album/{id}");
+
+            return Execute<KSoftAlbumInfo>(request);
+        }
+
+
+        public KSoftTrackInfo TrackByID(int id) {
+            var request = new RestRequest($"lyrics/track/{id}");
+
+            return Execute<KSoftTrackInfo>(request);
+        }
         #endregion
     }
 }
