@@ -1,11 +1,9 @@
-﻿using RestSharp;
+﻿using KSoft.Net.Responses;
+using RestSharp;
 using System;
-using KSoft.Net.Responses;
 
-namespace KSoft.Net
-{
-    public class KSoftApi
-    {
+namespace KSoft.Net {
+    public class KSoftApi {
         const string BaseUrl = "https://api.ksoft.si/";
         readonly IRestClient _client;
 
@@ -18,11 +16,11 @@ namespace KSoft.Net
 
         public T Execute<T>(RestRequest request) where T : new() {
             request.AddHeader("Authorization", "Bearer " + _accountToken);
-            var response = _client.Execute<T>(request);
+            IRestResponse<T> response = _client.Execute<T>(request);
 
             if (response.ErrorException != null) {
                 const string message = "Error retrieving response.  Check inner details for more info.";
-                var ksoftException = new ApplicationException(message, response.ErrorException);
+                ApplicationException ksoftException = new ApplicationException(message, response.ErrorException);
                 throw ksoftException;
             }
             return response.Data;
@@ -37,7 +35,7 @@ namespace KSoft.Net
         /// <param name="nsfw">Name of the tag</param>  
         /// <returns>KSoftImage</returns>
         public KSoftImage RandomImage(string tag, bool nsfw = false) {
-            var request = new RestRequest("images/random-image");
+            RestRequest request = new RestRequest("images/random-image");
 
             request.AddQueryParameter("tag", tag);
             request.AddQueryParameter("nsfw", nsfw.ToString());
@@ -50,7 +48,7 @@ namespace KSoft.Net
         /// </summary>
         /// <returns>KSoftTags</returns>
         public KSoftTags Tags() {
-            var request = new RestRequest("images/tags");
+            RestRequest request = new RestRequest("images/tags");
 
             return Execute<KSoftTags>(request);
         }
@@ -61,7 +59,7 @@ namespace KSoft.Net
         /// <param name="query">Search query</param>
         /// <returns>KSoftTags</returns>
         public KSoftTags TagSearch(string query) {
-            var request = new RestRequest($"images/tags/{query}");
+            RestRequest request = new RestRequest($"images/tags/{query}");
 
             return Execute<KSoftTags>(request);
         }
@@ -72,7 +70,7 @@ namespace KSoft.Net
         /// <param name="snowflake">Image snowflake (unique ID)</param>
         /// <returns>KSoftImage</returns>
         public KSoftImage ImageFromSnowflake(string snowflake) {
-            var request = new RestRequest($"images/image/{snowflake}");
+            RestRequest request = new RestRequest($"images/image/{snowflake}");
 
             return Execute<KSoftImage>(request);
         }
@@ -82,7 +80,7 @@ namespace KSoft.Net
         /// </summary>
         /// <returns>KSoftRedditPost</returns>
         public KSoftRedditPost RandomMeme() {
-            var request = new RestRequest("images/random-meme");
+            RestRequest request = new RestRequest("images/random-meme");
 
             return Execute<KSoftRedditPost>(request);
         }
@@ -93,7 +91,7 @@ namespace KSoft.Net
         /// <param name="nsfw">Default: false, if to display nsfw content.</param>
         /// <returns>KSoftWikiHowPost</returns>
         public KSoftWikiHowPost RandomWikiHow(bool nsfw = false) {
-            var request = new RestRequest("images/random-wikihow");
+            RestRequest request = new RestRequest("images/random-wikihow");
 
             request.AddQueryParameter("nsfw", nsfw.ToString());
 
@@ -105,7 +103,7 @@ namespace KSoft.Net
         /// </summary>
         /// <returns>KSoftRedditPost</returns>
         public KSoftRedditPost RandomAww() {
-            var request = new RestRequest("images/random-aww");
+            RestRequest request = new RestRequest("images/random-aww");
 
             return Execute<KSoftRedditPost>(request);
         }
@@ -116,7 +114,7 @@ namespace KSoft.Net
         /// <param name="gifs">Default: false, if to retrieve gifs instead of images</param>
         /// <returns>KSoftRedditPost</returns>
         public KSoftRedditPost RandomNsfw(bool gifs) {
-            var request = new RestRequest("images/random-nsfw");
+            RestRequest request = new RestRequest("images/random-nsfw");
 
             request.AddQueryParameter("gifs", gifs.ToString());
 
@@ -131,7 +129,7 @@ namespace KSoft.Net
         /// <param name="span">Default: "day", select range from which to get the images. Can be one of the following: "hour", "day", "week", "month", "year", "all"</param>
         /// <returns>KSoftRedditPost</returns>
         public KSoftRedditPost RandomReddit(string subreddit, bool removeNsfw, string span) {
-            var request = new RestRequest($"images/rand-reddit/{subreddit}");
+            RestRequest request = new RestRequest($"images/rand-reddit/{subreddit}");
 
             request.AddQueryParameter("remove-nsfw", removeNsfw.ToString());
             request.AddQueryParameter("span", span);
@@ -156,7 +154,7 @@ namespace KSoft.Net
         /// <param name="appealPossible">If appeal should be disabled for that user.</param>
         /// <returns>KSoftBan</returns>
         public KSoftBan AddBan(long userID, string reason, string proof, long mod = 0, string userName = "0", string userDiscriminator = "0", bool appealPossible = false) {
-            var request = new RestRequest("bans/add", Method.POST);
+            RestRequest request = new RestRequest("bans/add", Method.POST);
 
             request.AddQueryParameter("user", userID.ToString());
             request.AddQueryParameter("reason", reason);
@@ -174,7 +172,7 @@ namespace KSoft.Net
         /// <param name="userID">Users Discord ID who's ban you'd like to check</param>
         /// <returns>KSoftBanInfo</returns>
         public KSoftBanInfo BanInfo(long userID) {
-            var request = new RestRequest("bans/info");
+            RestRequest request = new RestRequest("bans/info");
 
             request.AddQueryParameter("user", userID.ToString());
 
@@ -187,7 +185,7 @@ namespace KSoft.Net
         /// <param name="userID">Users Discord ID that you'd like to check</param>
         /// <returns>KSoftBanCheck</returns>
         public KSoftBanCheck BanCheck(long userID) {
-            var request = new RestRequest("bans/check");
+            RestRequest request = new RestRequest("bans/check");
 
             request.AddQueryParameter("user", userID.ToString());
 
@@ -201,7 +199,7 @@ namespace KSoft.Net
         /// <param name="force">Default: false, if true it deletes the entry from the database instead of deactivating</param>
         /// <returns>KSoftBanDeletion</returns>
         public KSoftBanDeletion DeleteBan(long userID, bool force = false) {
-            var request = new RestRequest("bans/delete", Method.DELETE);
+            RestRequest request = new RestRequest("bans/delete", Method.DELETE);
 
             request.AddQueryParameter("user", userID.ToString());
             request.AddQueryParameter("force", force.ToString());
@@ -216,7 +214,7 @@ namespace KSoft.Net
         /// <param name="perPage">Number of bans per page (default: 20)</param>
         /// <returns>KSoftBanList</returns>
         public KSoftBanList BanList(int page, int perPage) {
-            var request = new RestRequest("bans/list");
+            RestRequest request = new RestRequest("bans/list");
 
             request.AddQueryParameter("page", page.ToString());
             request.AddQueryParameter("per_page", perPage.ToString());
@@ -230,7 +228,7 @@ namespace KSoft.Net
         /// <param name="timestamp">Timestamp in seconds from 1.1.1970 (epoch time)</param>
         /// <returns>KSoftBanUpdates</returns>
         public KSoftBanUpdates BanUpdates(DateTimeOffset timestamp) {
-            var request = new RestRequest("bans/updates");
+            RestRequest request = new RestRequest("bans/updates");
 
             request.AddQueryParameter("timestamp", timestamp.ToUnixTimeSeconds().ToString());
 
@@ -238,7 +236,6 @@ namespace KSoft.Net
         }
 
         #endregion
-
 
         #region Kumo API
 
@@ -252,7 +249,7 @@ namespace KSoft.Net
         /// <param name="includeMap">Default: false, if to include an image of the area</param>
         /// <returns>KSoftLocation</returns>
         public KSoftLocation SearchLocation(string query, bool fast = false, bool more = false, int mapZoom = 12, bool includeMap = false) {
-            var request = new RestRequest("kumo/gis");
+            RestRequest request = new RestRequest("kumo/gis");
 
             request.AddQueryParameter("q", query);
             request.AddQueryParameter("fast", fast.ToString());
@@ -273,7 +270,7 @@ namespace KSoft.Net
         /// <param name="icons">Default: original, select icon pack</param>
         /// <returns>KSoftWeather</returns>
         public KSoftWeather BasicWeather(string reportType, string query, string units = "auto", string language = "en", string icons = "original") {
-            var request = new RestRequest($"kumo/weather/{reportType}");
+            RestRequest request = new RestRequest($"kumo/weather/{reportType}");
 
             request.AddQueryParameter("q", query);
             request.AddQueryParameter("units", units);
@@ -294,7 +291,7 @@ namespace KSoft.Net
         /// <param name="icons">Default: original, select icon pack</param>
         /// <returns>KSoftWeather</returns>
         public KSoftWeather AdvancedWeather(float latitude, float longitude, string reportType, string units = "auto", string language = "en", string icons = "original") {
-            var request = new RestRequest($"kumo/weather/{latitude},{longitude}/{reportType}");
+            RestRequest request = new RestRequest($"kumo/weather/{latitude},{longitude}/{reportType}");
 
             request.AddQueryParameter("units", units);
             request.AddQueryParameter("lang", language);
@@ -309,7 +306,7 @@ namespace KSoft.Net
         /// <param name="ip">IP address</param>
         /// <returns>KSoftGeoIP</returns>
         public KSoftGeoIP GeoIP(string ip) {
-            var request = new RestRequest($"kumo/geoip");
+            RestRequest request = new RestRequest($"kumo/geoip");
 
             request.AddQueryParameter("ip", ip);
 
@@ -324,7 +321,7 @@ namespace KSoft.Net
         /// <param name="value">Float or Integer you want to convert</param>
         /// <returns>KSoftCurrency</returns>
         public KSoftCurrency CurrencyConversion(string from, string to, float value) {
-            var request = new RestRequest($"kumo/currency");
+            RestRequest request = new RestRequest($"kumo/currency");
 
             request.AddQueryParameter("from", from);
             request.AddQueryParameter("to", to);
@@ -338,7 +335,7 @@ namespace KSoft.Net
         #region Lyrics & Music API
 
         public KSoftLyrics SearchLyrics(string query, bool textOnly, int limit) {
-            var request = new RestRequest($"lyrics/search");
+            RestRequest request = new RestRequest($"lyrics/search");
 
             request.AddQueryParameter("q", query);
             request.AddQueryParameter("text_only", textOnly.ToString());
@@ -359,21 +356,21 @@ namespace KSoft.Net
         */
 
         public KSoftArtistInfo ArtistByID(int id) {
-            var request = new RestRequest($"lyrics/artist/{id}");
+            RestRequest request = new RestRequest($"lyrics/artist/{id}");
 
             return Execute<KSoftArtistInfo>(request);
         }
 
 
         public KSoftAlbumInfo AlbumByID(int id) {
-            var request = new RestRequest($"lyrics/album/{id}");
+            RestRequest request = new RestRequest($"lyrics/album/{id}");
 
             return Execute<KSoftAlbumInfo>(request);
         }
 
 
         public KSoftTrackInfo TrackByID(int id) {
-            var request = new RestRequest($"lyrics/track/{id}");
+            RestRequest request = new RestRequest($"lyrics/track/{id}");
 
             return Execute<KSoftTrackInfo>(request);
         }
