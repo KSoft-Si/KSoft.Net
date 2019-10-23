@@ -1,27 +1,22 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoft.Net.Responses
-{
-
-    public class KSoftTrackInfoArtist
-    {
+namespace KSoftNet.Responses {
+    public class KSoftAlbumInfoArtist {
         public int Id { get; set; }
         public string Name { get; set; }
     }
 
-    public class KSoftTrackInfoAlbum
-    {
+    public class KSoftAlbumInfoTrack {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class KSoftAlbumInfo {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
-    }
-
-    public class KSoftTrackInfo
-    {
-        public string Name { get; set; }
-        public KSoftTrackInfoArtist Artist { get; set; }
-        public IList<KSoftTrackInfoAlbum> Albums { get; set; }
-        public string Lyrics { get; set; }
+        public KSoftAlbumInfoArtist Artist { get; set; }
+        public IList<KSoftAlbumInfoTrack> Tracks { get; set; }
 
         // Error
         public int Code { get; set; }

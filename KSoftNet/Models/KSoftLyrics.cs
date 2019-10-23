@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoft.Net.Responses
-{
-    public class KSoftLyricsData
-    {
+namespace KSoftNet.Responses {
+    public class KSoftLyricsData {
         public string Artist { get; set; }
         public int ArtistId { get; set; }
         public string Album { get; set; }
@@ -16,8 +14,7 @@ namespace KSoft.Net.Responses
         public double SearchScore { get; set; }
     }
 
-    public class KSoftLyrics
-    {
+    public class KSoftLyrics {
         public int Total { get; set; }
         public int Took { get; set; }
         public IList<KSoftLyricsData> Data { get; set; }

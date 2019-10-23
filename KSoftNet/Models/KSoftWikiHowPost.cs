@@ -1,7 +1,5 @@
-﻿namespace KSoft.Net.Responses
-{
-    public class KSoftWikiHowPost
-    {
+﻿namespace KSoftNet.Responses {
+    public class KSoftWikiHowPost {
         public string Url { get; set; }
         public string Title { get; set; }
         public bool Nsfw { get; set; }

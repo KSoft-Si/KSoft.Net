@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KSoft.Net.Responses
-{
+namespace KSoftNet.Responses {
 
 
-    public class KSoftWeatherAlert
-    {
+    public class KSoftWeatherAlert {
         public string Title { get; set; }
         public IList<string> Regions { get; set; }
         public string Severity { get; set; }
@@ -16,15 +14,13 @@ namespace KSoft.Net.Responses
         public string Uri { get; set; }
     }
 
-    public class KSoftWeatherLocation
-    {
+    public class KSoftWeatherLocation {
         public double Lat { get; set; }
         public double Lon { get; set; }
         public string Address { get; set; }
     }
 
-    public class KSoftWeatherData
-    {
+    public class KSoftWeatherData {
         public DateTime Time { get; set; }
         public string Summary { get; set; }
         public string Icon { get; set; }
@@ -50,8 +46,7 @@ namespace KSoft.Net.Responses
         public KSoftWeatherLocation Location { get; set; }
     }
 
-    public class KSoftWeather
-    {
+    public class KSoftWeather {
         public bool Error { get; set; }
         public int Status { get; set; }
         public string Message { get; set; }
