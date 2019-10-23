@@ -1,7 +1,5 @@
-﻿namespace KSoft.Net.Responses
-{
-    public class KSoftCurrency
-    {
+﻿namespace KSoftNet.Responses {
+    public class KSoftCurrency {
         public double Value { get; set; }
         public string Pretty { get; set; }
 

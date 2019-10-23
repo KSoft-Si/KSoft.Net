@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoft.Net.Responses
-{
-    public class KSoftLocationData
-    {
+namespace KSoftNet.Responses {
+    public class KSoftLocationData {
         public string Address { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
@@ -12,8 +10,7 @@ namespace KSoft.Net.Responses
         public string Map { get; set; }
     }
 
-    public class KSoftLocation
-    {
+    public class KSoftLocation {
         public bool Error { get; set; }
         public int Code { get; set; }
         public KSoftLocationData Data { get; set; }

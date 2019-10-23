@@ -1,9 +1,7 @@
 ﻿using System;
-    
-namespace KSoft.Net.Responses
-{
-    public class KSoftBanInfo
-    {
+
+namespace KSoftNet.Responses {
+    public class KSoftBanInfo {
         public long Id { get; set; }
         public string Name { get; set; }
         public string Discriminator { get; set; }

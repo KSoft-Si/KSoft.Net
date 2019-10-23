@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -8,10 +8,11 @@
     <Description>C# wrapper for the KSoft API</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>KSoftNet</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\KSoft.Net.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\KSoftNet.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

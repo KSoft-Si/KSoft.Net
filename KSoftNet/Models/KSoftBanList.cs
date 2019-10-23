@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KSoft.Net.Responses
-{
-    public class KSoftBanListData
-    {
+namespace KSoftNet.Responses {
+    public class KSoftBanListData {
         public object Id { get; set; }
         public string Name { get; set; }
         public string Discriminator { get; set; }
@@ -18,8 +16,7 @@ namespace KSoft.Net.Responses
         public object AppealDate { get; set; }
     }
 
-    public class KSoftBanList
-    {
+    public class KSoftBanList {
         public int BanCount { get; set; }
         public int PageCount { get; set; }
         public int PerPage { get; set; }

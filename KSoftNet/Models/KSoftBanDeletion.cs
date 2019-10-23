@@ -1,7 +1,5 @@
-﻿namespace KSoft.Net.Responses
-{
-    public class KSoftBanDeletion
-    {
+﻿namespace KSoftNet.Responses {
+    public class KSoftBanDeletion {
         public string Done { get; set; }
 
         // Error

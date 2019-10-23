@@ -1,7 +1,5 @@
-﻿namespace KSoft.Net.Responses
-{
-    public class KSoftBan
-    {
+﻿namespace KSoftNet.Responses {
+    public class KSoftBan {
         public bool Success { get; set; }
         public bool Exists { get; set; }
 

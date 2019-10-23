@@ -1,7 +1,5 @@
-﻿namespace KSoft.Net.Responses
-{
-    public class KSoftRedditPost
-    {
+﻿namespace KSoftNet.Responses {
+    public class KSoftRedditPost {
         public string Title { get; set; }
         public string ImageUrl { get; set; }
         public string Source { get; set; }

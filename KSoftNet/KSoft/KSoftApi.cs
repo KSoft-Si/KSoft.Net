@@ -1,8 +1,8 @@
-﻿using KSoft.Net.Responses;
+﻿using KSoftNet.Responses;
 using RestSharp;
 using System;
 
-namespace KSoft.Net {
+namespace KSoftNet {
     public class KSoftApi {
         const string BaseUrl = "https://api.ksoft.si/";
         readonly IRestClient _client;
