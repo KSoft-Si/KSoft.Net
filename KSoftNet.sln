@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSoftNet", "KSoftNet\KSoftNet.csproj", "{C6672F0D-32C8-4581-BD64-2BC0ABB856DE}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KSoftNetTestProject", "KSoftNetTestProject\KSoftNetTestProject.csproj", "{541DE4AE-CC13-4FE5-9D0D-C44C1C72BCAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,12 +22,16 @@ Global
 		{C6672F0D-32C8-4581-BD64-2BC0ABB856DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6672F0D-32C8-4581-BD64-2BC0ABB856DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6672F0D-32C8-4581-BD64-2BC0ABB856DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541DE4AE-CC13-4FE5-9D0D-C44C1C72BCAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541DE4AE-CC13-4FE5-9D0D-C44C1C72BCAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541DE4AE-CC13-4FE5-9D0D-C44C1C72BCAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541DE4AE-CC13-4FE5-9D0D-C44C1C72BCAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {69C845EF-3DC5-49C2-991C-BB451F3DC907}
 		BuildVersion_StartDate = 2000/1/1
+		SolutionGuid = {69C845EF-3DC5-49C2-991C-BB451F3DC907}
 	EndGlobalSection
 EndGlobal
