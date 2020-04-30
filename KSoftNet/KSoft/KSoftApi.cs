@@ -2,7 +2,6 @@
 using RestSharp;
 using System;
 
-<<<<<<< Updated upstream
 namespace KSoftNet {
     public class KSoftApi {
         const string BaseUrl = "https://api.ksoft.si/";
@@ -17,27 +16,12 @@ namespace KSoftNet {
 
         public T Execute<T>(RestRequest request) where T : new() {
             request.AddHeader("Authorization", "Bearer " + _accountToken);
-=======
-namespace KSoftNet.KSoft {
-    public class KSoftAPI {
-        const string BaseUrl = "https://api.ksoft.si/";
-        readonly IRestClient _client;
-
-        /// <summary>
-        /// KSoftApi
-        /// </summary>
-        /// <param name="accountToken">KSoft token located on your dashboard</param>
-        public KSoftAPI(string accountToken) => _client = new RestClient(BaseUrl) {
-            Authenticator = new KSoftAuthenticator(accountToken)
-        };
-
-        public T Execute<T>(RestRequest request) where T : new() {
->>>>>>> Stashed changes
             IRestResponse<T> response = _client.Execute<T>(request);
 
             if (response.ErrorException != null) {
-                const string errorMessage = "Error retrieving response. Check inner details for more info.";
-                throw new ApplicationException(errorMessage, response.ErrorException);
+                const string message = "Error retrieving response.  Check inner details for more info.";
+                ApplicationException ksoftException = new ApplicationException(message, response.ErrorException);
+                throw ksoftException;
             }
             return response.Data;
         }
