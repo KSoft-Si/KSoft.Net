@@ -2,13 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+<<<<<<< Updated upstream
     <Version>2.2.1</Version>
+=======
+    <Version>2.4.0</Version>
+>>>>>>> Stashed changes
     <Authors>fooooooooooooooo</Authors>
     <Company>KSoft.si</Company>
     <Description>C# wrapper for the KSoft API</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyName>KSoftNet</AssemblyName>
+<<<<<<< Updated upstream
+=======
+    <AssemblyVersion>2.4.0.0</AssemblyVersion>
+    <FileVersion>2.4.0.0</FileVersion>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/KSoft-Si/KSoft.Net</RepositoryUrl>
+>>>>>>> Stashed changes
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,7 +28,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="106.6.10" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.10.1" />
   </ItemGroup>
 
 </Project>
