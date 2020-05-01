@@ -10,7 +10,7 @@
 Add the NuGet package `KSoftNet` to your project:
 
 ```ps
-dotnet add package RestSharp
+dotnet add package KSoftNet
 ```
 
 ### Simple Example usage
