@@ -2,22 +2,6 @@
 using RestSharp;
 using System;
 
-<<<<<<< Updated upstream
-namespace KSoftNet {
-    public class KSoftApi {
-        const string BaseUrl = "https://api.ksoft.si/";
-        readonly IRestClient _client;
-
-        string _accountToken;
-
-        public KSoftApi(string accountToken) {
-            _client = new RestClient(BaseUrl);
-            _accountToken = accountToken;
-        }
-
-        public T Execute<T>(RestRequest request) where T : new() {
-            request.AddHeader("Authorization", "Bearer " + _accountToken);
-=======
 namespace KSoftNet.KSoft {
     public class KSoftAPI {
         const string BaseUrl = "https://api.ksoft.si/";
@@ -32,7 +16,6 @@ namespace KSoftNet.KSoft {
         };
 
         public T Execute<T>(RestRequest request) where T : new() {
->>>>>>> Stashed changes
             IRestResponse<T> response = _client.Execute<T>(request);
 
             if (response.ErrorException != null) {
