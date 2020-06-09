@@ -74,7 +74,6 @@ public class Startup {
     }
 
     private void ConfigureServices(IServiceCollection services) {
-        services.AddSingleton(kSoftAPI);
         services.AddSingleton(imagesAPI);
     }
 }
