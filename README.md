@@ -6,6 +6,8 @@
 
 [KSoft.Si API](http://api.ksoft.si) is a service that provides Discord bot developers or others the ease in getting content from the internet. We provide easy to use interface and take hard tasks away from developers.
 
+### If you find any errors/issues or want any features added, create an issue and I will fix it ASAP
+
 ## Getting started
 
 ### Installing the package
