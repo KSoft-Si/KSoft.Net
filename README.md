@@ -1,12 +1,15 @@
 # KSoft.si API Wrapper
+
 > http://api.ksoft.si
 
 ## Overview
+
 [KSoft.Si API](http://api.ksoft.si) is a service that provides Discord bot developers or others the ease in getting content from the internet. We provide easy to use interface and take hard tasks away from developers.
 
 ## Getting started
 
 ### Installing the package
+
 Add the NuGet package `KSoftNet` to your project:
 
 ```ps
@@ -14,40 +17,39 @@ dotnet add package KSoftNet
 ```
 
 ### Simple Example usage
+
 You can use the wrapper with the images API for example like so:
-	
-Create an instance of the KSoftApi and ImagesApi classes: 
+Create an instance of the KSoftAPI class:
+
 ```cs
-using KSoftNet.KSoft;
+using KSoftNet;
 
 public class ExampleClass {
-	string token = "token";
+	private string _token = "token";
 
-	KSoftApi kSoftApi;
-	ImagesApi imagesApi;
+	private KSoftAPI _kSoftAPI;
 
 	public void Setup() {
-		kSoftApi = new KSoftApi(token);
-		imagesApi = new ImagesApi(kSoftApi);
+		_kSoftAPI = new KSoftAPI(_token);
 	}
 }
 ```
 
 An example implementation of the RandomImage method:
+
 ```cs
 public void ExampleMethod(string tag) {
-	KSoftImage image = imagesApi.RandomImage(tag: tag);
+	KSoftImage image = _kSoftAPI.imagesAPI.RandomImage(tag: tag);
 }
 ```
 
-
 ### Example using dependency injection
 
-Create instances of the classes you're going to use, then create a ServiceCollection, add them to it, and then build the service provider:
+Create an instance of the KSoftAPI class, then create a ServiceCollection, add KSoftAPI to it, and then build the service provider:
 
 ```cs
 using Microsoft.Extensions.DependencyInjection;
-using KSoftNet.KSoft;
+using KSoftNet;
 
 public class Program {
 
@@ -58,23 +60,21 @@ public class Program {
 
 public class Startup {
 
-    private KSoftAPI kSoftAPI;
-    private ImagesAPI imagesAPI;
+    private KSoftAPI _kSoftAPI;
 
-    private string token = "token123";
+    private string _token = "token123";
 
     public void Init() {
         ServiceCollection services = new ServiceCollection();
 
-        kSoftAPI = new KSoftAPI(token);
-        imagesAPI = new ImagesAPI(kSoftAPI);
+        kSoftAPI = new KSoftAPI(_token);
 
         ConfigureServices(services);
         ServiceProvider provider = services.BuildServiceProvider();
     }
 
     private void ConfigureServices(IServiceCollection services) {
-        services.AddSingleton(imagesAPI);
+        services.AddSingleton(kSoftAPI);
     }
 }
 ```
@@ -82,21 +82,20 @@ public class Startup {
 Using this in a class:
 
 ```cs
-using KSoftNet.KSoft;
+using KSoftNet;
 
  public class ExampleClass {
 
-    private ImagesAPI imagesApi;
+    private KSoftAPI _kSoftAPI;
 
-    public ExampleClass(ImagesAPI imagesApi) {
-        this.imagesApi = imagesApi;
+    public ExampleClass(KSoftAPI kSoftAPI) {
+        _kSoftAPI = kSoftAPI;
     }
 
     public void GetRandomImage(string tag) {
-        var image = imagesApi.RandomImage(tag: tag);
+        KSoftImage image = _kSoftAPI.imagesAPI.RandomImage(tag: tag);
 
         Console.WriteLine(image.Url);
     }
 }
 ```
-
