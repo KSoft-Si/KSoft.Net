@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class KSoftLyricsData {
         public string Artist { get; set; }
         public int ArtistId { get; set; }

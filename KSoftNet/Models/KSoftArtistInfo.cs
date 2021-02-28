@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class KSoftArtistInfoAlbum {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,6 +14,7 @@ namespace KSoftNet.Responses {
 
     public class KSoftArtistInfo {
         public int Id { get; set; }
+        public string Uri { get; set; }
         public string Name { get; set; }
         public IList<KSoftArtistInfoAlbum> Albums { get; set; }
         public IList<KSoftArtistInfoTrack> Tracks { get; set; }

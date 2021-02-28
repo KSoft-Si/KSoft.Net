@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
-    public class KSoftBanUpdatesData {
+namespace KSoftNet.Models {
+    public class KSoftBanUpdatesDatum {
         public object Id { get; set; }
         public string Reason { get; set; }
         public string Proof { get; set; }
@@ -10,7 +10,7 @@ namespace KSoftNet.Responses {
     }
 
     public class KSoftBanUpdates {
-        public IList<KSoftBanUpdatesData> Data { get; set; }
+        public IList<KSoftBanUpdatesDatum> Data { get; set; }
         public int CurrentTimestamp { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class KSoftBanInfo {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Discriminator { get; set; }
-        public long ModeratorId { get; set; }
+        public string ModeratorId { get; set; }
         public string Reason { get; set; }
         public string Proof { get; set; }
         public bool IsBanActive { get; set; }

@@ -1,5 +1,6 @@
-﻿namespace KSoftNet.Responses {
-    public class KSoftRedditPost {
+﻿namespace KSoftNet.Models {
+    public class KSoftRedditPost
+    {
         public string Title { get; set; }
         public string ImageUrl { get; set; }
         public string Source { get; set; }
@@ -7,8 +8,11 @@
         public int Upvotes { get; set; }
         public int Downvotes { get; set; }
         public int Comments { get; set; }
-        public int CreatedAt { get; set; }
+        public double CreatedAt { get; set; }
         public bool Nsfw { get; set; }
         public string Author { get; set; }
+        public int Awards { get; set; }
+        public bool MetaCached { get; set; }
+        public bool MetaProcessed { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace KSoftNet.Responses {
+﻿namespace KSoftNet.Models {
     public class KSoftCurrency {
         public double Value { get; set; }
         public string Pretty { get; set; }

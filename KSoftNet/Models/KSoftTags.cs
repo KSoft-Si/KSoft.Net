@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class Model {
         public string Name { get; set; }
         public bool Nsfw { get; set; }

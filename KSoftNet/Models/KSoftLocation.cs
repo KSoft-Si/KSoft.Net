@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class KSoftLocationData {
         public string Address { get; set; }
         public double Lat { get; set; }

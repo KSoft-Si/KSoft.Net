@@ -1,6 +1,8 @@
-﻿using KSoftNet.Responses;
-using RestSharp;
+﻿using KSoftNet.Models;
 using System;
+using System.Collections.Specialized;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace KSoftNet.KSoft {
     /// <summary>
@@ -8,7 +10,11 @@ namespace KSoftNet.KSoft {
     /// </summary>
     public class BansAPI {
 
-        private KSoftAPI _kSoftAPI;
+        private readonly KSoftAPI _kSoftAPI;
+        /// <summary>
+        /// Advanced and powerful global ban list API
+        /// </summary>
+        /// <param name="kSoftAPI">Base KSoftAPI class</param>
         public BansAPI(KSoftAPI kSoftAPI) {
             _kSoftAPI = kSoftAPI;
         }
@@ -26,18 +32,19 @@ namespace KSoftNet.KSoft {
         /// <param name="userDiscriminator">Users Discord discriminator</param>
         /// <param name="appealPossible">If appeal should be disabled for that user.</param>
         /// <returns>KSoftBan</returns>
-        public KSoftBan AddBan(long userID, string reason, string proof, long mod = 0, string userName = "0", string userDiscriminator = "0", bool appealPossible = false) {
-            RestRequest request = new RestRequest("bans/add", Method.POST);
+        public async Task<KSoftBan> AddBan(string userID, string reason, string proof, long mod = 0, string userName = "0", string userDiscriminator = "0", bool appealPossible = false) {
 
-            request.AddQueryParameter(name: "user", value: userID.ToString());
-            request.AddQueryParameter(name: "reason", value: reason);
-            request.AddQueryParameter(name: "proof", value: proof);
-            request.AddQueryParameter(name: "mod", value: mod.ToString());
-            request.AddQueryParameter(name: "user_name", value: userName);
-            request.AddQueryParameter(name: "user_discriminator", value: userDiscriminator);
-            request.AddQueryParameter(name: "appeal_possible", value: appealPossible.ToString());
+            NameValueCollection queries = new NameValueCollection();
 
-            return _kSoftAPI.Execute<KSoftBan>(request);
+            queries.Add(name: "user", value: userID);
+            queries.Add(name: "reason", value: reason);
+            queries.Add(name: "proof", value: proof);
+            queries.Add(name: "mod", value: mod.ToString());
+            queries.Add(name: "user_name", value: userName);
+            queries.Add(name: "user_discriminator", value: userDiscriminator);
+            queries.Add(name: "appeal_possible", value: appealPossible.ToString());
+
+            return await _kSoftAPI.ExecuteAsync<KSoftBan>(HttpMethod.Get, "bans/add", queries);
         }
 
         /// <summary>
@@ -45,12 +52,12 @@ namespace KSoftNet.KSoft {
         /// </summary>
         /// <param name="userID">Users Discord ID who's ban you'd like to check</param>
         /// <returns>KSoftBanInfo</returns>
-        public KSoftBanInfo BanInfo(long userID) {
-            RestRequest request = new RestRequest("bans/info");
+        public async Task<KSoftBanInfo> BanInfo(string userID) {
+            NameValueCollection queries = new NameValueCollection();
 
-            request.AddQueryParameter(name: "user", value: userID.ToString());
+            queries.Add(name: "user", value: userID);
 
-            return _kSoftAPI.Execute<KSoftBanInfo>(request);
+            return await _kSoftAPI.ExecuteAsync<KSoftBanInfo>(HttpMethod.Get, "bans/info", queries);
         }
 
         /// <summary>
@@ -58,12 +65,12 @@ namespace KSoftNet.KSoft {
         /// </summary>
         /// <param name="userID">Users Discord ID that you'd like to check</param>
         /// <returns>KSoftBanCheck</returns>
-        public KSoftBanCheck BanCheck(long userID) {
-            RestRequest request = new RestRequest("bans/check");
+        public async Task<KSoftBanCheck> BanCheck(string userID) {
+            NameValueCollection queries = new NameValueCollection();
 
-            request.AddQueryParameter(name: "user", value: userID.ToString());
+            queries.Add(name: "user", value: userID);
 
-            return _kSoftAPI.Execute<KSoftBanCheck>(request);
+            return await _kSoftAPI.ExecuteAsync<KSoftBanCheck>(HttpMethod.Get, "bans/check", queries);
         }
 
         /// <summary>
@@ -72,13 +79,13 @@ namespace KSoftNet.KSoft {
         /// <param name="userID">Users Discord ID</param>
         /// <param name="force">Default: false, if true it deletes the entry from the database instead of deactivating</param>
         /// <returns>KSoftBanDeletion</returns>
-        public KSoftBanDeletion DeleteBan(long userID, bool force = false) {
-            RestRequest request = new RestRequest("bans/delete", Method.DELETE);
+        public async Task<KSoftBanDeletion> DeleteBan(string userID, bool force = false) {
+            NameValueCollection queries = new NameValueCollection();
 
-            request.AddQueryParameter(name: "user", value: userID.ToString());
-            request.AddQueryParameter(name: "force", value: force.ToString());
+            queries.Add(name: "user", value: userID);
+            queries.Add(name: "force", value: force.ToString());
 
-            return _kSoftAPI.Execute<KSoftBanDeletion>(request);
+            return await _kSoftAPI.ExecuteAsync<KSoftBanDeletion>(HttpMethod.Delete, "bans/delete", queries);
         }
 
         /// <summary>
@@ -87,13 +94,13 @@ namespace KSoftNet.KSoft {
         /// <param name="page">Page number (default: 1)</param>
         /// <param name="perPage">Number of bans per page (default: 20)</param>
         /// <returns>KSoftBanList</returns>
-        public KSoftBanList BanList(int page, int perPage) {
-            RestRequest request = new RestRequest("bans/list");
+        public async Task<KSoftBanList> BanList(int page, int perPage) {
+            NameValueCollection queries = new NameValueCollection();
 
-            request.AddQueryParameter(name: "page", value: page.ToString());
-            request.AddQueryParameter(name: "per_page", value: perPage.ToString());
+            queries.Add(name: "page", value: page.ToString());
+            queries.Add(name: "per_page", value: perPage.ToString());
 
-            return _kSoftAPI.Execute<KSoftBanList>(request);
+            return await _kSoftAPI.ExecuteAsync<KSoftBanList>(HttpMethod.Get, "bans/list", queries);
         }
 
         /// <summary>
@@ -101,12 +108,12 @@ namespace KSoftNet.KSoft {
         /// </summary>
         /// <param name="timestamp">Timestamp in seconds from 1.1.1970 (epoch time)</param>
         /// <returns>KSoftBanUpdates</returns>
-        public KSoftBanUpdates BanUpdates(DateTimeOffset timestamp) {
-            RestRequest request = new RestRequest("bans/updates");
+        public async Task<KSoftBanUpdates> BanUpdates(DateTime timestamp) {
+            NameValueCollection queries = new NameValueCollection();
 
-            request.AddQueryParameter(name: "timestamp", value: timestamp.ToUnixTimeSeconds().ToString());
+            queries.Add(name: "timestamp", value: ((DateTimeOffset)timestamp).ToUnixTimeSeconds().ToString());
 
-            return _kSoftAPI.Execute<KSoftBanUpdates>(request);
+            return await _kSoftAPI.ExecuteAsync<KSoftBanUpdates>(HttpMethod.Get, "bans/updates", queries);
         }
 
         #endregion

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
 
 
     public class KSoftWeatherAlert {

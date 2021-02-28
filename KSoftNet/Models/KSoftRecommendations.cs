@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class KSoftRecommendationsYoutube {
         public string Id { get; set; }
         public string Link { get; set; }

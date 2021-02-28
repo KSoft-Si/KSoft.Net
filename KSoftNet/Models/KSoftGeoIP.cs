@@ -1,5 +1,5 @@
-﻿namespace KSoftNet.Responses {
-    public class KSoftGeoIPApis {
+﻿namespace KSoftNet.Models {
+    public class KSoftGeoIPAPIs {
         public string Weather { get; set; }
         public string Gis { get; set; }
         public string Openstreetmap { get; set; }
@@ -18,7 +18,7 @@
         public string PostalCode { get; set; }
         public string Region { get; set; }
         public string TimeZone { get; set; }
-        public KSoftGeoIPApis Apis { get; set; }
+        public KSoftGeoIPAPIs APIs { get; set; }
     }
 
     public class KSoftGeoIP {

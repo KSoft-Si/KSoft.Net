@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
-    public class KSoftBanListData {
-        public object Id { get; set; }
+namespace KSoftNet.Models {
+    public class KSoftBanListDatum {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Discriminator { get; set; }
-        public object ModeratorId { get; set; }
+        public string ModeratorId { get; set; }
         public string Reason { get; set; }
         public string Proof { get; set; }
         public bool IsBanActive { get; set; }
         public bool CanBeAppealed { get; set; }
         public DateTime Timestamp { get; set; }
-        public object AppealReason { get; set; }
+        public string AppealReason { get; set; }
         public object AppealDate { get; set; }
     }
 
@@ -24,7 +24,7 @@ namespace KSoftNet.Responses {
         public int OnPage { get; set; }
         public int NextPage { get; set; }
         public object PreviousPage { get; set; }
-        public IList<KSoftBanListData> Data { get; set; }
+        public IList<KSoftBanListDatum> Data { get; set; }
 
         // Error
         public bool Error { get; set; }

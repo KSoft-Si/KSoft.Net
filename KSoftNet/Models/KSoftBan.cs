@@ -1,4 +1,4 @@
-﻿namespace KSoftNet.Responses {
+﻿namespace KSoftNet.Models {
     public class KSoftBan {
         public bool Success { get; set; }
         public bool Exists { get; set; }

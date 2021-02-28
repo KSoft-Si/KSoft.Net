@@ -1,4 +1,4 @@
-﻿namespace KSoftNet.Responses {
+﻿namespace KSoftNet.Models {
     public class KSoftImage {
         public string Url { get; set; }
         public string Snowflake { get; set; }

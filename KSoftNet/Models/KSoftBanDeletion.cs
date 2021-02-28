@@ -1,4 +1,4 @@
-﻿namespace KSoftNet.Responses {
+﻿namespace KSoftNet.Models {
     public class KSoftBanDeletion {
         public string Done { get; set; }
 

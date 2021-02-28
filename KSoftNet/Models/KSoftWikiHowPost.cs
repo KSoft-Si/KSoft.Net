@@ -1,4 +1,4 @@
-﻿namespace KSoftNet.Responses {
+﻿namespace KSoftNet.Models {
     public class KSoftWikiHowPost {
         public string Url { get; set; }
         public string Title { get; set; }

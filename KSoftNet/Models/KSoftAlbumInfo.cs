@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
 
-namespace KSoftNet.Responses {
+namespace KSoftNet.Models {
     public class KSoftAlbumInfoArtist {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Uri { get; set; }
     }
 
     public class KSoftAlbumInfoTrack {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Uri { get; set; }
     }
 
     public class KSoftAlbumInfo {
         public int Id { get; set; }
+        public string Uri { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
         public KSoftAlbumInfoArtist Artist { get; set; }
