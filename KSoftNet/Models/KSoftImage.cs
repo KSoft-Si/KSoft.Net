@@ -7,19 +7,8 @@
 
         // Error
 
-        /// <summary>
-        /// Error code
-        /// </summary>
         public int Code { get; set; }
-
-        /// <summary>
-        /// Error message
-        /// </summary>
         public string Message { get; set; }
-
-        /// <summary>
-        /// Error
-        /// </summary>
         public bool Cache { get; set; }
     }
 }

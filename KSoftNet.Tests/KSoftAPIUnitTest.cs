@@ -1,48 +1,50 @@
-using KSoftNet.Models;
+using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Threading.Tasks;
 
 namespace KSoftNet.Tests {
     [TestClass]
     public class KSoftAPIUnitTest {
 
-        public string token = "";
-        readonly KSoftAPI kSoftAPI;
 
-        public KSoftAPIUnitTest() {
-            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile("config.json").Build();
-            token = configuration["token"];
-
-            kSoftAPI = new KSoftAPI(token);
-        }
-
-
-        public JsonSerializerSettings jsonSettings = new JsonSerializerSettings {
+        private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings {
             ContractResolver = new DefaultContractResolver {
                 NamingStrategy = new SnakeCaseNamingStrategy()
             }
         };
 
-        public void LogObject(object obj) {
-            Console.WriteLine(JsonConvert.SerializeObject(obj, jsonSettings));
+        private readonly KSoftAPI _kSoftAPI;
+
+        public KSoftAPIUnitTest() {
+            var configuration = new ConfigurationBuilder().AddJsonFile("config.json").Build();
+            var token = configuration["token"];
+
+            _kSoftAPI = new KSoftAPI(token);
         }
+
+        private void LogObject(object obj) {
+            Console.WriteLine(JsonConvert.SerializeObject(obj, _jsonSettings));
+        }
+
+        // I know that these are not really unit tests and that they're bad tests in general
+        // but they are just so I can click a button and know that I didn't horribly break
+        // something :)
 
         [TestMethod]
         public void TestCreation() {
-            Assert.IsNotNull(kSoftAPI.imagesAPI);
-            Assert.IsNotNull(kSoftAPI.kumoAPI);
-            Assert.IsNotNull(kSoftAPI.musicAPI);
-            Assert.IsNotNull(kSoftAPI.imagesAPI);
-            Assert.IsNotNull(kSoftAPI.BaseUrl);
+            Assert.IsNotNull(_kSoftAPI.imagesAPI);
+            Assert.IsNotNull(_kSoftAPI.kumoAPI);
+            Assert.IsNotNull(_kSoftAPI.musicAPI);
+            Assert.IsNotNull(_kSoftAPI.imagesAPI);
+            Assert.IsNotNull(KSoftAPI.BaseUrl);
         }
 
         [TestMethod]
         public async Task TestRandomImage() {
-            KSoftImage image = await kSoftAPI.imagesAPI.RandomImage("pepe");
+            var image = await _kSoftAPI.imagesAPI.RandomImage("pepe");
 
             LogObject(image);
 
@@ -55,7 +57,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestTags() {
-            KSoftTags tags = await kSoftAPI.imagesAPI.Tags();
+            var tags = await _kSoftAPI.imagesAPI.Tags();
 
             LogObject(tags);
 
@@ -66,7 +68,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestTagSearch() {
-            KSoftTags tags = await kSoftAPI.imagesAPI.TagSearch("birb");
+            var tags = await _kSoftAPI.imagesAPI.TagSearch("birb");
 
             LogObject(tags);
 
@@ -76,7 +78,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestImageFromSnowflake() {
-            KSoftImage image = await kSoftAPI.imagesAPI.ImageFromSnowflake("i-7n36tlpw-30");
+            var image = await _kSoftAPI.imagesAPI.ImageFromSnowflake("i-7n36tlpw-30");
 
             LogObject(image);
 
@@ -88,7 +90,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestRandomMeme() {
-            KSoftRedditPost meme = await kSoftAPI.imagesAPI.RandomMeme();
+            var meme = await _kSoftAPI.imagesAPI.RandomMeme();
 
             LogObject(meme);
 
@@ -109,7 +111,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestRandomWikiHow() {
-            KSoftWikiHowPost wh = await kSoftAPI.imagesAPI.RandomWikiHow();
+            var wh = await _kSoftAPI.imagesAPI.RandomWikiHow();
 
             LogObject(wh);
 
@@ -121,7 +123,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestRandomAww() {
-            KSoftRedditPost aww = await kSoftAPI.imagesAPI.RandomAww();
+            var aww = await _kSoftAPI.imagesAPI.RandomAww();
 
             LogObject(aww);
 
@@ -142,7 +144,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestRandomNsfw() {
-            KSoftRedditPost nsfw = await kSoftAPI.imagesAPI.RandomNsfw(false);
+            var nsfw = await _kSoftAPI.imagesAPI.RandomNsfw(false);
 
             LogObject(nsfw);
 
@@ -163,7 +165,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestRandomReddit() {
-            KSoftRedditPost aww = await kSoftAPI.imagesAPI.RandomReddit("pics", true, "day");
+            var aww = await _kSoftAPI.imagesAPI.RandomReddit("pics", true, "day");
 
             LogObject(aww);
 
@@ -184,7 +186,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestGeoIP() {
-            KSoftGeoIP geoip = await kSoftAPI.kumoAPI.GeoIP("8.8.8.8");
+            var geoip = await _kSoftAPI.kumoAPI.GeoIP("8.8.8.8");
 
             LogObject(geoip);
 
@@ -195,19 +197,19 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestCurrencyConversion() {
-            KSoftCurrency currency = await kSoftAPI.kumoAPI.CurrencyConversion("USD", "CAD", 100);
+            var currency = await _kSoftAPI.kumoAPI.CurrencyConversion("USD", "CAD", 100);
 
             LogObject(currency);
 
             Assert.IsFalse(currency.Error);
-            Assert.AreEqual(127.371, currency.Value);
-            Assert.AreEqual("127.37 CAD", currency.Pretty);
+            Assert.AreEqual(124.6437, currency.Value);
+            Assert.AreEqual("124.64 CAD", currency.Pretty);
         }
 
 
         [TestMethod]
         public async Task TestSearchLyrics() {
-            KSoftLyrics lyrics = await kSoftAPI.musicAPI.SearchLyrics("Is this the real life? Is this just fantasy?", true, 1);
+            var lyrics = await _kSoftAPI.musicAPI.SearchLyrics("Is this the real life? Is this just fantasy?", true, 1);
 
             LogObject(lyrics);
 
@@ -218,7 +220,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestArtistByID() {
-            KSoftArtistInfo artist = await kSoftAPI.musicAPI.ArtistByID(28333);
+            var artist = await _kSoftAPI.musicAPI.ArtistByID(28333);
 
             LogObject(artist);
 
@@ -232,7 +234,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestAlbumByID() {
-            KSoftAlbumInfo album = await kSoftAPI.musicAPI.AlbumByID(88287);
+            var album = await _kSoftAPI.musicAPI.AlbumByID(88287);
 
             LogObject(album);
 
@@ -247,7 +249,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestTrackByID() {
-            KSoftTrackInfo track = await kSoftAPI.musicAPI.TrackByID(628942);
+            var track = await _kSoftAPI.musicAPI.TrackByID(628942);
 
             LogObject(track);
 
@@ -266,7 +268,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestBanInfo() {
-            KSoftBanInfo banInfo = await kSoftAPI.bansAPI.BanInfo("766186017979760681");
+            var banInfo = await _kSoftAPI.bansAPI.BanInfo("766186017979760681");
 
             LogObject(banInfo);
 
@@ -287,7 +289,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestBanCheck() {
-            KSoftBanCheck banCheck = await kSoftAPI.bansAPI.BanCheck("69");
+            var banCheck = await _kSoftAPI.bansAPI.BanCheck("69");
 
             LogObject(banCheck);
 
@@ -296,7 +298,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestBanCheck2() {
-            KSoftBanCheck banCheck = await kSoftAPI.bansAPI.BanCheck("766186017979760681");
+            var banCheck = await _kSoftAPI.bansAPI.BanCheck("766186017979760681");
 
             LogObject(banCheck);
 
@@ -305,7 +307,7 @@ namespace KSoftNet.Tests {
 
         [TestMethod]
         public async Task TestBanList() {
-            KSoftBanList banList = await kSoftAPI.bansAPI.BanList(1, 2);
+            var banList = await _kSoftAPI.bansAPI.BanList(1, 2);
 
             LogObject(banList);
 
@@ -322,16 +324,13 @@ namespace KSoftNet.Tests {
         [TestMethod]
         public async Task TestBanUpdates() {
 
-            DateTime time = DateTime.Now - TimeSpan.FromDays(10);
-            KSoftBanUpdates banUpdates = await kSoftAPI.bansAPI.BanUpdates(time);
+            var time = DateTime.Now - TimeSpan.FromDays(10);
+            var banUpdates = await _kSoftAPI.bansAPI.BanUpdates(time);
 
             LogObject(banUpdates);
 
             Assert.IsNotNull(banUpdates.CurrentTimestamp);
             Assert.IsNotNull(banUpdates.Data);
         }
-
-
-
     }
 }

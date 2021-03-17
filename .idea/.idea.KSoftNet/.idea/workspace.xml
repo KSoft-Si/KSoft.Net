@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dd0674aa-9d82-49ee-9c9e-8f97ae15a1f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.KSoftNet/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.KSoftNet/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.KSoftNet/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.KSoftNet/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet.Tests/KSoftAPIUnitTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet.Tests/KSoftAPIUnitTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet.Tests/KSoftNet.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet.Tests/KSoftNet.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/KSoft/BansAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/KSoft/BansAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/KSoft/ImagesAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/KSoft/ImagesAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/KSoft/KumoAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/KSoft/KumoAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/KSoft/MusicAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/KSoft/MusicAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/KSoftAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/KSoftAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/KSoftNet.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/KSoftNet.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftAlbumInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftAlbumInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftCurrency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftCurrency.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftImage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftImage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftRedditPost.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftRedditPost.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftTags.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftTags.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftTrackInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftTrackInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftWeather.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftWeather.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSoftNet/Models/KSoftWikiHowPost.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet/Models/KSoftWikiHowPost.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/.editorconfig" />
+      <option value="$PROJECT_DIR$/KSoftNet/KSoftAPI.cs" />
+      <option value="$PROJECT_DIR$/KSoftNet/KSoft/MusicAPI.cs" />
+      <option value="$PROJECT_DIR$/KSoftNet/Models/KSoftCurrency.cs" />
+    </changedPaths>
+  </component>
+  <component name="ProjectId" id="1pseNAQgpHSTDoPQ7oLMjzb8RIA" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Publish to folder.Build NuGet Package">
+    <configuration name="Build NuGet Package" type="DotNetFolderPublish" factoryName="Publish to folder">
+      <riderPublish configuration="Release" platform="Any CPU" runtime="Portable" target_folder="$PROJECT_DIR$/KSoftNet/bin/Release/netcoreapp2.1/publish" target_framework="netcoreapp2.1" uuid_high="-4150296797865556607" uuid_low="-4799663196355406114" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Publish to folder.Build NuGet Package" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd0674aa-9d82-49ee-9c9e-8f97ae15a1f2" name="Default Changelist" comment="" />
+      <created>1615976183439</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615976183439</updated>
+      <workItem from="1615976186230" duration="618000" />
+      <workItem from="1615976820709" duration="2631000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnitTestsCoverage.Settings">
+    <option name="coveragePercentColumnWidth" value="150" />
+    <option name="sortOrder" value="DESCENDING" />
+    <option name="sortedColumn" value="1" />
+    <option name="symbolColumnWidth" value="240" />
+    <coverage-tree-state>
+      <expand>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 5% 755/798" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 5% 755/798" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="KSoftNet 7% 555/596" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 5% 755/798" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="KSoftNet 7% 555/596" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="KSoftNet 7% 555/596" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+      </expand>
+      <select />
+    </coverage-tree-state>
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
