@@ -539,3 +539,5 @@ obj/
 # Ionide (cross platform F# VS Code tools) working folder
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,csharp,dotnetcore,git
+
+KSoftNet.Tests/config.json
