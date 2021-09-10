@@ -1,6 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace KSoftNet.Models.Images {
+  /// <summary>
+  /// WikiHow post
+  /// </summary>
   public class WikihowPost {
     /// <summary>
     /// Post image URL
