@@ -1,12 +1,17 @@
 # KSoft.si API Wrapper
 
+[![nuget version][0]][1]
+[![downloads][2]][1]
+
 > http://api.ksoft.si
 
 ## Overview
 
-[KSoft.Si API](http://api.ksoft.si) is a service that provides Discord bot developers or others the ease in getting content from the internet. We provide easy to use interface and take hard tasks away from developers.
+[KSoft.Si API](http://api.ksoft.si) is a professional, fast, reliable and easy to use multi-function service for Discord
+bot developers or websites. It provides easy, no-nonsense endpoints with an extensive library of images, user data,
+weather, geo-location and songs. We help you build awesome services and keep Discord community safe and sound.
 
-### If you find any errors/issues or want any features added, create an issue and I will fix it ASAP
+### If you find any errors/issues or want any features added, [create an issue](https://github.com/KSoft-Si/KSoft.Net/issues/new/choose)
 
 ## Getting started
 
@@ -18,86 +23,123 @@ Add the NuGet package `KSoftNet` to your project:
 dotnet add package KSoftNet
 ```
 
-### Simple Example usage
+### Simple usage
 
-You can use the wrapper with the images API for example like so:
-Create an instance of the KSoftAPI class:
+A minimal example to get a random image by tag
+
+A complete example is available in the `examples/SimpleUsage` project
 
 ```cs
+using System;
+using System.Threading.Tasks;
 using KSoftNet;
 
 public class ExampleClass {
-	private string _token = "token";
+  private readonly KSoftApi _kSoftApi;
 
-	private KSoftAPI _kSoftAPI;
+  public ExampleClass(string token) {
+    _kSoftApi = new KSoftApi(token);
+  }
 
-	public void Setup() {
-		_kSoftAPI = new KSoftAPI(_token);
-	}
+  public async Task GetRandomImage(string tag) {
+    var image = await _kSoftApi.ImagesApi.GetRandomImage(tag: tag);
+
+    Console.WriteLine(image.Url);
+  }
 }
 ```
 
-An example implementation of the RandomImage method:
+### Example using custom HttpClient
+
+You can provide your own HttpClient instance, but you have to set the Authorization header and the BaseAddress manually
+
+A complete example is available in the `examples/CustomHttpclient` project
 
 ```cs
-public void ExampleMethod(string tag) {
-	KSoftImage image = _kSoftAPI.imagesAPI.RandomImage(tag: tag);
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using KSoftNet;
+
+public ExampleClass(string token) {
+  var httpClient = new HttpClient {
+    BaseAddress = new Uri("https://api.ksoft.si"),
+    DefaultRequestHeaders = {
+      Authorization = new AuthenticationHeaderValue("Bearer", token)
+    }
+  };
+
+  _kSoftApi = new KSoftApi(httpClient);
 }
 ```
 
 ### Example using dependency injection
 
-Create an instance of the KSoftAPI class, then create a ServiceCollection, add KSoftAPI to it, and then build the service provider:
+Create a ServiceCollection, then add an instance of the KSoftApi class to it
+
+A complete example is available in the `examples/DependencyInjection` project
 
 ```cs
-using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 using KSoftNet;
-
-public class Program {
-
-    static void Main(string[] args) {
-        new Startup().Init();
-    }
-}
+using Microsoft.Extensions.DependencyInjection;
 
 public class Startup {
+  private const string Token = "{token}";
+  private KSoftApi _kSoftApi;
 
-    private KSoftAPI _kSoftAPI;
+  private IServiceProvider _serviceProvider;
 
-    private string _token = "token123";
+  public void Init() {
+    var services = new ServiceCollection();
 
-    public void Init() {
-        ServiceCollection services = new ServiceCollection();
+    _kSoftApi = new KSoftApi(Token);
 
-        kSoftAPI = new KSoftAPI(_token);
+    ConfigureServices(services);
+    _serviceProvider = services.BuildServiceProvider();
+  }
 
-        ConfigureServices(services);
-        ServiceProvider provider = services.BuildServiceProvider();
-    }
+  public async Task RunAsync() {
+    var exampleClass = _serviceProvider.GetService<ExampleClass>();
 
-    private void ConfigureServices(IServiceCollection services) {
-        services.AddSingleton(kSoftAPI);
-    }
+    var image = await exampleClass.GetRandomImage("birb");
+
+    Console.WriteLine(image.Url);
+  }
+
+  private void ConfigureServices(IServiceCollection services) {
+    services.AddSingleton(_kSoftApi);
+    services.AddSingleton<ExampleClass>();
+  }
 }
 ```
 
 Using this in a class:
 
 ```cs
+using System.Threading.Tasks;
 using KSoftNet;
+using KSoftNet.Models.Images;
 
- public class ExampleClass {
+public class ExampleClass {
+  private readonly KSoftApi _kSoftApi;
 
-    private KSoftAPI _kSoftAPI;
+  public ExampleClass(KSoftApi kSoftApi) {
+    _kSoftApi = kSoftApi;
+  }
 
-    public ExampleClass(KSoftAPI kSoftAPI) {
-        _kSoftAPI = kSoftAPI;
-    }
+  public async Task<Image> GetRandomImage(string tag) {
+    var image = await _kSoftApi.ImagesApi.GetRandomImage(tag: tag);
 
-    public void GetRandomImage(string tag) {
-        KSoftImage image = _kSoftAPI.imagesAPI.RandomImage(tag: tag);
-
-        Console.WriteLine(image.Url);
-    }
+    return image;
+  }
 }
 ```
+
+[0]: https://img.shields.io/nuget/v/KSoftNet?style=flat-square
+
+[1]: https://www.nuget.org/packages/KSoftNet
+
+[2]: https://img.shields.io/nuget/dt/KSoftNet?style=flat-square

@@ -23,5 +23,5 @@ namespace SimpleUsage {
 
       Console.WriteLine(image.Url);
     }
-  }
+  }                                                                   
 }

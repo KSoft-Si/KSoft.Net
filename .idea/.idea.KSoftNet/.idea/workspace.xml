@@ -8,18 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd0674aa-9d82-49ee-9c9e-8f97ae15a1f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CustomHttpclient/CustomHttpclient.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomHttpclient/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DependencyInjection/DependencyInjection.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DependencyInjection/ExampleClass.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DependencyInjection/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KSoftNet.Examples/KSoftNet.Examples.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KSoftNet.Examples/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimpleUsage/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SimpleUsage/SimpleUsage.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KSoftNet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KSoftNet/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KSoftNet.sln" beforeDir="false" afterPath="$PROJECT_DIR$/KSoftNet.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleUsage/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleUsage/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +168,7 @@
       <workItem from="1615976820709" duration="3328000" />
       <workItem from="1631191289148" duration="25345000" />
       <workItem from="1631263325061" duration="10158000" />
-      <workItem from="1631273578125" duration="1082000" />
+      <workItem from="1631273578125" duration="2498000" />
     </task>
     <servers />
   </component>
