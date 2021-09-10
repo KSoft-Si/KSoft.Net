@@ -7,13 +7,6 @@ using Newtonsoft.Json;
 using Refit;
 
 namespace KSoftNet {
-
-  public static class CumExtensions {
-    public static string ToJson(this object obj) {
-      return JsonConvert.SerializeObject(obj);
-    }
-  }
-
   /// <summary>
   ///   KSoftApi class
   /// </summary>
