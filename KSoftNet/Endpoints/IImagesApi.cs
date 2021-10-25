@@ -78,6 +78,6 @@ namespace KSoftNet.Endpoints {
     /// <param name="removeNsfw">Default: false, if set to true, endpoint will filter out nsfw posts.</param>
     /// <returns>Reddit post</returns>
     [Get("/images/rand-reddit/{subreddit}")]
-    Task<RedditPost> GetRandomReddit(string subreddit, Span span = Span.Day, [AliasAs("remove_nsfw")] bool removeNsfw = false);
+    Task<RedditPost> GetRandomReddit(string subreddit, Span span = Span.Day, [AliasAs("remove_nsfw")] bool removeNsfw = true);
   }
 }
